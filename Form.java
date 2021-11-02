@@ -12,12 +12,25 @@ public class Form extends JFrame implements ActionListener {
     JCheckBox termsChB;
     JButton submitB;
 
-    String days[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
-            "19", "20", "21", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
+    String days[] = new String[31];
     String months[] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" };
-    String years[] = { "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014" };
+    String years[] = new String[50];
+    int dayInit = 1;
+    int yearInit = 2021;
+
+    void initNums(){
+        for (int i = 0; i < 50; i++) {
+            years[i] = String.valueOf(yearInit);
+            yearInit--;
+        }
+        for (int i = 0; i < 31; i++) {
+            days[i] = String.valueOf(dayInit);
+            dayInit++;
+        }
+    }
 
     Form() {
+        initNums();
         setTitle("Registration Form");
         setSize(700, 500);
         setLayout(null);
@@ -82,7 +95,7 @@ public class Form extends JFrame implements ActionListener {
         add(addressTA);
 
         // Terms Section
-        termsChB = new JCheckBox("Please Accept Terms and Condition");
+        termsChB = new JCheckBox("I Accept Terms and Condition");
         termsChB.setBounds(50, 300, 250, 20);
         add(termsChB);
 
