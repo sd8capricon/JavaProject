@@ -33,7 +33,7 @@ public class Form extends JFrame implements ActionListener {
     Form() {
         initNums();
         setTitle("Student Registration Form");
-        setSize(700, 700);
+        setSize(700, 900);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -157,7 +157,7 @@ public class Form extends JFrame implements ActionListener {
 
         // MSG
         msgL = new JLabel("");
-        msgL.setBounds(50, 600, 250, 20);
+        msgL.setBounds(240, 650, 250, 20);
         add(msgL);
 
         setVisible(true);
@@ -186,20 +186,20 @@ public class Form extends JFrame implements ActionListener {
                         FileWriter fw = new FileWriter(num + ".txt");
                         fw.write(data);
                         fw.close();
-                        msgL.setText("Registration Successful");
+                        msgL.setText("           Registration Successful");
                     } catch (Exception err) {
                         System.out.println(err);
                     }
                 }
                 else {
-                    System.out.println("File already exists.");
-                    msgL.setText("User already exists!!");
+                    System.out.println("              File already exists.");
+                    msgL.setText("             User already exists!!");
                 }
             } catch (Exception err) {
                 System.out.println(err);
             }
         } else {
-            msgL.setText("Please Accept Terms and Condition");
+            msgL.setText("*Please Accept Terms and Condition");
         }
     }
 
