@@ -33,7 +33,7 @@ public class Form extends JFrame implements ActionListener {
     Form() {
         initNums();
         setTitle("Student Registration Form");
-        setSize(700, 900);
+        setSize(700, 750);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
