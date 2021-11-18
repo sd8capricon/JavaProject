@@ -28,7 +28,7 @@ public class Read {
                 }
                 sc.close();
             } catch (Exception err) {
-                System.out.println("File Not Found");
+                System.out.println(err);
             }
         }
     }
