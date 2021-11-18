@@ -1,35 +1,47 @@
-// Example to filter data wrt to name
+// Example to filter data wrt name of user
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Read {
     public static void main(String[] args) {
-        
+
         File dirpath = new File(".");
-        File filesList[] = dirpath.listFiles((d, name) -> name.endsWith(".txt")); 
+        File filesList[] = dirpath.listFiles((d, name) -> name.endsWith(".txt"));
         // ^ java Lambda func. Similar to JS ES6 anonymous arrow funcs
 
-        String searchTerm = "Siddharth";
-        
-        for(File fileName: filesList){
+        Scanner sc = new Scanner(System.in);
+        String searchTerm = sc.nextLine();
+        // String searchTerm = "Siddharth";
+        sc.close();
+
+        ArrayList<String> dataList = new ArrayList<String>();
+
+        for (File fileName : filesList) {
             String fName = fileName.getName();
             try {
                 File file = new File(fName);
-                Scanner sc = new Scanner(file);
+                Scanner fsc = new Scanner(file);
                 // int counter = 0;
                 String data = "";
                 // System.out.println(file.exists());
-                while(sc.hasNextLine()){
-                    data = data.concat("\n"+sc.nextLine());
+                while (fsc.hasNextLine()) {
+                    data = data.concat("\n" + fsc.nextLine());
                 }
-                if(data.contains(searchTerm)){
-                    System.out.println(true);
+                if (data.contains(searchTerm)) {
+                    // System.out.println(data);
+                    dataList.add(data);
                 }
-                sc.close();
+                fsc.close();
             } catch (Exception err) {
                 System.out.println(err);
             }
+        }
+        if (dataList.isEmpty()) {
+            System.out.println("No User Found with Specified name");
+        } else {
+            System.out.println(dataList);
         }
     }
 }

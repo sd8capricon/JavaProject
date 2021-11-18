@@ -17,25 +17,33 @@ public class SearchPage extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == searchBtn){
-            String num = numTF.getText();
-            // String name = nameTF.getText();
+            // String num = numTF.getText();
+            String name = nameTF.getText();
             
-            int counter = 0;
-            try {
-                File file = new File(num + ".txt");
-                Scanner sc = new Scanner(file);
-                while(counter == 0){
-                    String data = sc.nextLine();
-                    if (counter == 0){
-                        data = data.substring(6);
+            File dirpath = new File(".");
+            File filesList[] = dirpath.listFiles((d, fname) -> fname.endsWith(".txt")); 
+            // ^ java Lambda func. Similar to JS ES6 anonymous arrow funcs
+
+            String searchTerm = name;
+            
+            for(File fileName: filesList){
+                String fName = fileName.getName();
+                try {
+                    File file = new File(fName);
+                    Scanner fsc = new Scanner(file);
+                    // int counter = 0;
+                    String data = "";
+                    // System.out.println(file.exists());
+                    while(fsc.hasNextLine()){
+                        data = data.concat("\n"+fsc.nextLine());
+                    }
+                    if(data.contains(searchTerm)){
                         System.out.println(data);
                     }
-                    // System.out.println(data);
-                    counter++;
+                    fsc.close();
+                } catch (Exception err) {
+                    System.out.println(err);
                 }
-                sc.close();
-            } catch (Exception err) { 
-                System.out.println("File Not Found");
             }
         }
     }
