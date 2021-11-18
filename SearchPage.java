@@ -1,6 +1,7 @@
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SearchPage extends JFrame implements ActionListener{
@@ -20,11 +21,13 @@ public class SearchPage extends JFrame implements ActionListener{
             // String num = numTF.getText();
             String name = nameTF.getText();
             
-            File dirpath = new File(".");
-            File filesList[] = dirpath.listFiles((d, fname) -> fname.endsWith(".txt")); 
+            File dirPath = new File(".");
+            File filesList[] = dirPath.listFiles((d, fname) -> fname.endsWith(".txt")); 
             // ^ java Lambda func. Similar to JS ES6 anonymous arrow funcs
 
             String searchTerm = name;
+
+            ArrayList<String> dataList = new ArrayList<String>();
             
             for(File fileName: filesList){
                 String fName = fileName.getName();
@@ -44,6 +47,13 @@ public class SearchPage extends JFrame implements ActionListener{
                 } catch (Exception err) {
                     System.out.println(err);
                 }
+            }
+
+            // TODO:Handle these in GUI as well
+            if (dataList.isEmpty()) {
+                System.out.println("No User Found with Specified name");
+            } else {
+                System.out.println(dataList);
             }
         }
     }

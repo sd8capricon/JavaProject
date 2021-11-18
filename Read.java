@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class Read {
     public static void main(String[] args) {
 
-        File dirpath = new File(".");
-        File filesList[] = dirpath.listFiles((d, name) -> name.endsWith(".txt"));
+        File dirPath = new File(".");
+        File filesList[] = dirPath.listFiles((d, name) -> name.endsWith(".txt"));
         // ^ java Lambda func. Similar to JS ES6 anonymous arrow funcs
 
         Scanner sc = new Scanner(System.in);
