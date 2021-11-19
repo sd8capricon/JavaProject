@@ -30,10 +30,10 @@ public class SearchPage extends JFrame implements ActionListener{
             ArrayList<String> dataList = new ArrayList<String>();
             
             for(File fileName: filesList){
-                String fName = fileName.getName();
+                // String fName = fileName.getName();
                 try {
-                    File file = new File(fName);
-                    Scanner fsc = new Scanner(file);
+                    // File file = new File(fName);
+                    Scanner fsc = new Scanner(fileName);
                     // int counter = 0;
                     String data = "";
                     // System.out.println(file.exists());
@@ -41,7 +41,8 @@ public class SearchPage extends JFrame implements ActionListener{
                         data = data.concat("\n"+fsc.nextLine());
                     }
                     if(data.contains(searchTerm)){
-                        System.out.println(data);
+                        // System.out.println(data);
+                        dataList.add(data);
                     }
                     fsc.close();
                 } catch (Exception err) {

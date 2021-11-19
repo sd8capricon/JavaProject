@@ -12,17 +12,15 @@ public class Read {
         // ^ java Lambda func. Similar to JS ES6 anonymous arrow funcs
 
         Scanner sc = new Scanner(System.in);
-        String searchTerm = sc.nextLine();
-        // String searchTerm = "Siddharth";
+        // String searchTerm = sc.nextLine();
+        String searchTerm = "Siddharth";
         sc.close();
 
         ArrayList<String> dataList = new ArrayList<String>();
 
         for (File fileName : filesList) {
-            String fName = fileName.getName();
             try {
-                File file = new File(fName);
-                Scanner fsc = new Scanner(file);
+                Scanner fsc = new Scanner(fileName);
                 // int counter = 0;
                 String data = "";
                 // System.out.println(file.exists());
