@@ -7,33 +7,33 @@ import javax.swing.JOptionPane;
 
 public class SearchPage extends JFrame implements ActionListener{
     JFrame frame = new JFrame();
-    JLabel nameL;
+    JLabel nameL,numL;
     JTextField numTF, nameTF;
-    JButton searchBtn;
+    JButton snameBtn,snumBtn;
 
     SearchPage(){
-        setTitle("Search Name");
-        setSize(400, 350);
+        setTitle("Search Page");
+        setSize(300, 350);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
 
         // Name
         nameL = new JLabel("Enter Name");
-        nameL.setBounds(20,50,100,20);
+        nameL.setBounds(30,50,100,20);
         add(nameL);
 
         nameTF = new JTextField();
-        nameTF.setBounds(110,50,100,20);
+        nameTF.setBounds(120,50,100,20);
         add(nameTF);
 
         // Search button
-        searchBtn = new JButton("Search");
-        searchBtn.setBounds(120,90,80,20);
-        add(searchBtn);
-		searchBtn.addActionListener(new ActionListener() {
+        snameBtn = new JButton("Search");
+        snameBtn.setBounds(130,90,80,20);
+        add(snameBtn);
+		snameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == searchBtn){
+                if(e.getSource() == snameBtn){
                     // String num = numTF.getText();
                     String name = nameTF.getText();
                     
@@ -75,6 +75,24 @@ public class SearchPage extends JFrame implements ActionListener{
 
                     }
                 }
+			}
+		});
+        // Number
+        numL = new JLabel("Enter Number");
+        numL.setBounds(30,140,100,20);
+        add(numL);
+
+        numTF = new JTextField();
+        numTF.setBounds(120,140,100,20);
+        add(numTF);
+
+        // Search button
+        snumBtn = new JButton("Search");
+        snumBtn.setBounds(130,180,80,20);
+        add(snumBtn);
+		snameBtn.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+
 			}
 		});
     };
