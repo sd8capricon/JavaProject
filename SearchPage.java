@@ -89,24 +89,29 @@ public class SearchPage extends JFrame implements ActionListener{
         snumBtn = new JButton("Search");
         snumBtn.setBounds(130,180,80,20);
         add(snumBtn);
-		snameBtn.addActionListener(new ActionListener(){
+		snumBtn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-                String num = numTF.getText();
-                File numberFile = new File(num+".txt");
-                String numData = "";
-                try {
-                    Scanner fsc2 = new Scanner(numberFile);
-                    if(numberFile.exists()){
-                        while (fsc2.hasNextLine()) {
-                            numData = numData.concat("\n" + fsc2.nextLine());
+                if(e.getSource() == snameBtn){
+                    String num = numTF.getText();
+                    File numberFile = new File(num+".txt");
+                    String numData = "";
+                    try {
+                        Scanner fsc2 = new Scanner(numberFile);
+                        if(numberFile.exists()){
+                            while (fsc2.hasNextLine()) {
+                                numData = numData.concat("\n" + fsc2.nextLine());
+                            }
+                            JOptionPane.showMessageDialog(frame,numData);
                         }
+                        else{
+                            JOptionPane.showMessageDialog(frame,"No Application Found with Specified number");                       
+                        }
+                        fsc2.close();
+                    } catch (Exception err) {
+                        System.out.println(e);
                     }
-                    fsc2.close();
-                } catch (Exception err) {
-                    System.out.println(e);
-                }
                     
-                
+                }
 			}
 
 		});
