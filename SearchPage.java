@@ -18,7 +18,7 @@ public class SearchPage extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == searchBtn){
-            // String num = numTF.getText();
+            String num = numTF.getText();
             String name = nameTF.getText();
             
             File dirPath = new File(".");
@@ -55,6 +55,21 @@ public class SearchPage extends JFrame implements ActionListener{
                 System.out.println("No User Found with Specified name");
             } else {
                 System.out.println(dataList);
+            }
+
+            // Searching by Number
+            File numberFile = new File(num+".txt");
+            String numData = "";
+            try {
+                Scanner fsc2 = new Scanner(numberFile);
+                if(numberFile.exists()){
+                    while (fsc2.hasNextLine()) {
+                        numData = numData.concat("\n" + fsc2.nextLine());
+                    }
+                }
+                fsc2.close();
+            } catch (Exception err) {
+                System.out.println(e);
             }
         }
     }
