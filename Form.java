@@ -4,13 +4,13 @@ import java.io.File;
 import java.io.FileWriter;
 
 public class Form extends JFrame implements ActionListener {
-    JLabel nameL, mobileL, genderL, dobL, addressL, msgL,emailL,examL,marksL,branchL,collegeL;
+    JLabel nameL, mobileL, genderL, dobL, addressL, msgL,emailL,examL,marksL,branchL,collegeL,searchL;
     JTextField nameTF, mobileTF, emailTF,markTF;
     JTextArea addressTA, dispTA;
     JRadioButton maleRB, femaleRB;
     JComboBox dayCB, monthCB, yearCB,examCB,branchCB;
     JCheckBox termsChB;
-    JButton submitB;
+    JButton submitB, searchB;
     
 
     String days[] = new String[31];
@@ -39,46 +39,46 @@ public class Form extends JFrame implements ActionListener {
 
         //College Name
         collegeL = new JLabel("DON BOSCO INSTITUTE OF TECHNOLOGY");
-        collegeL.setBounds(220,50,300,30);
+        collegeL.setBounds(220,30,300,30);
         add(collegeL);
 
         // Name Section
         nameL = new JLabel("Name");
-        nameL.setBounds(20, 100, 100, 20);
+        nameL.setBounds(20, 80, 100, 20);
         add(nameL);
 
         nameTF = new JTextField();
-        nameTF.setBounds(130, 100, 100, 20);
+        nameTF.setBounds(130, 80, 100, 20);
         add(nameTF);
 
         // Contact Section
         mobileL = new JLabel("Mobile");
-        mobileL.setBounds(20, 150, 100, 20);
+        mobileL.setBounds(20, 130, 100, 20);
         add(mobileL);
 
         mobileTF = new JTextField();
-        mobileTF.setBounds(130, 150, 100, 20);
+        mobileTF.setBounds(130, 130, 100, 20);
         add(mobileTF);
 
         // Email Section
         emailL = new JLabel("Email ID");
-        emailL.setBounds(20, 200, 100, 20);
+        emailL.setBounds(20, 180, 100, 20);
         add(emailL);
 
         emailTF = new JTextField();
-        emailTF.setBounds(130, 200, 100, 20);
+        emailTF.setBounds(130, 180, 100, 20);
         add(emailTF);
 
 
         // Gender Section
         genderL = new JLabel("Gender");
-        genderL.setBounds(20, 250, 100, 20);
+        genderL.setBounds(20, 230, 100, 20);
         add(genderL);
 
         maleRB = new JRadioButton("Male");
         femaleRB = new JRadioButton("Female");
-        maleRB.setBounds(130, 250, 80, 20);
-        femaleRB.setBounds(220, 250, 100, 20);
+        maleRB.setBounds(130, 230, 80, 20);
+        femaleRB.setBounds(220, 230, 100, 20);
         add(maleRB);
         add(femaleRB);
 
@@ -88,78 +88,86 @@ public class Form extends JFrame implements ActionListener {
 
         // DOB Section
         dobL = new JLabel("DOB");
-        dobL.setBounds(20, 300, 100, 20);
+        dobL.setBounds(20, 280, 100, 20);
         add(dobL);
 
         dayCB = new JComboBox(days);
         monthCB = new JComboBox(months);
         yearCB = new JComboBox(years);
-        dayCB.setBounds(130, 300, 50, 20);
-        monthCB.setBounds(190, 300, 50, 20);
-        yearCB.setBounds(250, 300, 60, 20);
+        dayCB.setBounds(130, 280, 50, 20);
+        monthCB.setBounds(190, 280, 50, 20);
+        yearCB.setBounds(250, 280, 60, 20);
         add(dayCB);
         add(monthCB);
         add(yearCB);
 
         // Address Section
         addressL = new JLabel("Address");
-        addressL.setBounds(20, 350, 100, 20);
+        addressL.setBounds(20, 330, 100, 20);
         add(addressL);
 
         addressTA = new JTextArea();
-        addressTA.setBounds(130, 340, 200, 50);
+        addressTA.setBounds(130, 320, 200, 50);
         add(addressTA);
 
         // Exam Section
         examL = new JLabel("Exam");
-        examL.setBounds(20,400,100,20);
+        examL.setBounds(20,380,100,20);
         add(examL);
 
         String examb[] = {"JEE","MHT-CET"};
         examCB = new JComboBox(examb);
-        examCB.setBounds(130,400,100,20);
+        examCB.setBounds(130,380,100,20);
         add(examCB);
 
         // Marks Section
         marksL = new JLabel("Marks");
-        marksL.setBounds(20,450,100,20);
+        marksL.setBounds(20,430,100,20);
         add(marksL);
 
         markTF = new JTextField();
-        markTF.setBounds(130, 450, 100, 20);
+        markTF.setBounds(130, 430, 100, 20);
         add(markTF);
 
         // Branch Section
         branchL = new JLabel("Branch");
-        branchL.setBounds(20,500,100,20);
+        branchL.setBounds(20,480,100,20);
         add(branchL);
 
         String branchb[] = {"COMPUTER SCIENCE","INFORMATION TECHNOLOGY","EXTC","MECHANICAL"};
         branchCB = new JComboBox(branchb);
-        branchCB.setBounds(130,500,200,20);
+        branchCB.setBounds(130,480,200,20);
         add(branchCB);
 
         // Terms Section
         termsChB = new JCheckBox("I Accept Terms and Condition");
-        termsChB.setBounds(250, 550, 250, 20);
+        termsChB.setBounds(250, 530, 250, 20);
         add(termsChB);
 
         // Submit Button
         submitB = new JButton("Submit");
-        submitB.setBounds(300, 600, 80, 20);
+        submitB.setBounds(300, 580, 80, 20);
         submitB.addActionListener(this);
         add(submitB);
 
         // Display Area
         dispTA = new JTextArea();
-        dispTA.setBounds(350, 100, 300, 400);
+        dispTA.setBounds(350, 80, 300, 400);
         add(dispTA);
 
         // MSG
         msgL = new JLabel("");
-        msgL.setBounds(240, 650, 250, 20);
+        msgL.setBounds(240, 630, 250, 20);
         add(msgL);
 
+        // Search button
+        searchL = new JLabel("To Search Applicaation");
+        searchL.setBounds(20, 650, 150, 20);
+        add(searchL);
+
+        searchB = new JButton("Search");
+        searchB.setBounds(170, 650, 80, 20);
+        add(searchB);
         setVisible(true);
     }
 
