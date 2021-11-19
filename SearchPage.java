@@ -3,8 +3,10 @@ import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class SearchPage extends JFrame implements ActionListener{
+    JFrame frame = new JFrame();
     JLabel nameL;
     JTextField numTF, nameTF;
     JButton searchBtn;
@@ -66,7 +68,11 @@ public class SearchPage extends JFrame implements ActionListener{
         
                     // TODO:Handle these in GUI as well
                     if (dataList.isEmpty()) {
+                        JOptionPane.showMessageDialog(frame,"No Application Found with Specified name");
+
                     } else {
+                        JOptionPane.showMessageDialog(frame,dataList +" Application found");
+
                     }
                 }
 			}
