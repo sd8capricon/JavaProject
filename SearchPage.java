@@ -34,7 +34,6 @@ public class SearchPage extends JFrame implements ActionListener{
 		snameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == snameBtn){
-                    // String num = numTF.getText();
                     String name = nameTF.getText();
                     
                     File dirPath = new File(".");
@@ -71,7 +70,7 @@ public class SearchPage extends JFrame implements ActionListener{
                         JOptionPane.showMessageDialog(frame,"No Application Found with Specified name");
 
                     } else {
-                        JOptionPane.showMessageDialog(frame,dataList +" Application found");
+                        JOptionPane.showMessageDialog(frame,dataList.size() +" Application found");
 
                     }
                 }
@@ -92,8 +91,24 @@ public class SearchPage extends JFrame implements ActionListener{
         add(snumBtn);
 		snameBtn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-
+                String num = numTF.getText();
+                File numberFile = new File(num+".txt");
+                String numData = "";
+                try {
+                    Scanner fsc2 = new Scanner(numberFile);
+                    if(numberFile.exists()){
+                        while (fsc2.hasNextLine()) {
+                            numData = numData.concat("\n" + fsc2.nextLine());
+                        }
+                    }
+                    fsc2.close();
+                } catch (Exception err) {
+                    System.out.println(e);
+                }
+                    
+                
 			}
+
 		});
     };
 
