@@ -1,1 +1,1 @@
-# Java Min Project - Registration Form
+# Java Project - Registration Form
