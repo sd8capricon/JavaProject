@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class SearchPage extends JFrame implements ActionListener{
     JFrame frame = new JFrame();
-    JLabel nameL,numL;
+    JLabel nameL, numL, titlenameL, titlenumL;
     JTextField numTF, nameTF;
     JButton snameBtn,snumBtn;
 
@@ -19,17 +19,21 @@ public class SearchPage extends JFrame implements ActionListener{
         setVisible(true);
 
         // Name
+        titlenameL = new JLabel("To Search by Name");
+        titlenameL.setBounds(30,40,150,20);
+        add(titlenameL);
+
         nameL = new JLabel("Enter Name");
-        nameL.setBounds(30,50,100,20);
+        nameL.setBounds(30,70,100,20);
         add(nameL);
 
         nameTF = new JTextField();
-        nameTF.setBounds(120,50,100,20);
+        nameTF.setBounds(120,70,100,20);
         add(nameTF);
 
         // Search button
         snameBtn = new JButton("Search");
-        snameBtn.setBounds(130,90,80,20);
+        snameBtn.setBounds(130,110,80,20);
         add(snameBtn);
 		snameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -77,21 +81,25 @@ public class SearchPage extends JFrame implements ActionListener{
 			}
 		});
         // Number
+        titlenumL = new JLabel("To Search by Number");
+        titlenumL.setBounds(30,160,150,20);
+        add(titlenumL);
+
         numL = new JLabel("Enter Number");
-        numL.setBounds(30,140,100,20);
+        numL.setBounds(30,190,100,20);
         add(numL);
 
         numTF = new JTextField();
-        numTF.setBounds(120,140,100,20);
+        numTF.setBounds(120,190,100,20);
         add(numTF);
 
         // Search button
         snumBtn = new JButton("Search");
-        snumBtn.setBounds(130,180,80,20);
+        snumBtn.setBounds(130,240,80,20);
         add(snumBtn);
 		snumBtn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == snameBtn){
+                if(e.getSource() == snumBtn){
                     String num = numTF.getText();
                     File numberFile = new File(num+".txt");
                     String numData = "";
@@ -109,11 +117,9 @@ public class SearchPage extends JFrame implements ActionListener{
                         fsc2.close();
                     } catch (Exception err) {
                         System.out.println(e);
-                    }
-                    
+                    }                   
                 }
 			}
-
 		});
     };
 
