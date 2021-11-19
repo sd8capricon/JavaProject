@@ -161,7 +161,7 @@ public class Form extends JFrame implements ActionListener {
         add(msgL);
 
         // Search button
-        searchL = new JLabel("To Search Applicaation");
+        searchL = new JLabel("To Search Application");
         searchL.setBounds(20, 670, 150, 20);
         add(searchL);
 
