@@ -168,6 +168,12 @@ public class Form extends JFrame implements ActionListener {
         searchB = new JButton("Search");
         searchB.setBounds(170, 670, 80, 20);
         add(searchB);
+        searchB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchPage sp = new SearchPage();
+				sp.setVisible(true);
+			}
+		});
         setVisible(true);
     }
 
