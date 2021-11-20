@@ -109,15 +109,18 @@ public class SearchPage extends JFrame implements ActionListener{
                             while (fsc2.hasNextLine()) {
                                 numData = numData.concat("\n" + fsc2.nextLine());
                             }
-                            JOptionPane.showMessageDialog(frame,numData);
                         }
-                        else{
-                            JOptionPane.showMessageDialog(frame,"No Application Found with Specified number");                       
-                        }
+                        
                         fsc2.close();
                     } catch (Exception err) {
                         System.out.println(e);
-                    }                   
+                    }
+                    if(numberFile.exists()){
+                        JOptionPane.showMessageDialog(frame,numData);
+                    }      
+                    else{
+                        JOptionPane.showMessageDialog(frame,"No Application Found with Specified number");                       
+                    }
                 }
 			}
 		});
