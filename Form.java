@@ -172,6 +172,7 @@ public class Form extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				SearchPage sp = new SearchPage();
 				sp.setVisible(true);
+                setVisible(false);
 			}
 		});
         setVisible(true);
