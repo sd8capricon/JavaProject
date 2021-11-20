@@ -52,8 +52,10 @@ public class SearchPage extends JFrame implements ActionListener{
                         try {
                             Scanner fsc = new Scanner(fileName);
                             String data = "";
-                            while(fsc.hasNextLine()){
+                            int counter = 0;
+                            while(counter<3){
                                 data = data.concat("\n"+fsc.nextLine());
+                                counter++;
                             }
                             if(data.contains(searchTerm)){
                                 dataList.add(data);

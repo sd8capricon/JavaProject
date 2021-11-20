@@ -10,7 +10,7 @@ public class Form extends JFrame implements ActionListener {
     JRadioButton maleRB, femaleRB;
     JComboBox dayCB, monthCB, yearCB,examCB,branchCB;
     JCheckBox termsChB;
-    JButton submitB, searchB, exitB;
+    JButton submitB, searchB, exitB, resetB;
     
 
     String days[] = new String[31];
@@ -176,6 +176,11 @@ public class Form extends JFrame implements ActionListener {
 			}
 		});
 
+        resetB = new JButton("Reset");
+        resetB.setBounds(500, 670, 70, 20);
+        add(resetB);
+        resetB.addActionListener(this);
+
         exitB = new JButton("Exit");
         exitB.setBounds(590, 670, 60, 20);
         add(exitB);
@@ -187,43 +192,58 @@ public class Form extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    void clearTF(){
+        nameTF.setText("");
+        mobileTF.setText("");
+        emailTF.setText("");
+        addressTA.setText("");
+        markTF.setText("");
+    }
+
     public void actionPerformed(ActionEvent e) {
-        if (termsChB.isSelected()) {
-            String name = nameTF.getText();
-            String num = mobileTF.getText();
-            String email = emailTF.getText();
-            String exam = (String)(examCB.getSelectedItem());
-            String marks = markTF.getText();
-            String branch = (String)branchCB.getSelectedItem();
-            String gender = femaleRB.isSelected() ? "Female" : "Male";
-            String dob = dayCB.getSelectedItem() + "-" + monthCB.getSelectedItem() + "-" + yearCB.getSelectedItem();
-            String address = addressTA.getText();
-            
-            String data = "Name: " + name + "\nMobile Number: " + num+"\nEmail ID: "+ email + "\nGender: " + gender + "\nDOB: " + dob
-                    + "\nAddress: " + address +"\nExam: " + exam  + "\nMarks: " + marks + "\nBranch: " + branch;
-            dispTA.setText(data);
-            
-            try {
-                File file = new File(num + ".txt"); // Using mobile number as unique identifier
-                if (file.createNewFile()) {
-                    try {
-                        FileWriter fw = new FileWriter(num + ".txt");
-                        fw.write(data);
-                        fw.close();
-                        msgL.setText("           Registration Successful");
-                    } catch (Exception err) {
-                        System.out.println(err);
+        if(e.getSource() == submitB){
+            if (termsChB.isSelected()) {
+                String name = nameTF.getText();
+                String num = mobileTF.getText();
+                String email = emailTF.getText();
+                String exam = (String)(examCB.getSelectedItem());
+                String marks = markTF.getText();
+                String branch = (String)branchCB.getSelectedItem();
+                String gender = femaleRB.isSelected() ? "Female" : "Male";
+                String dob = dayCB.getSelectedItem() + "-" + monthCB.getSelectedItem() + "-" + yearCB.getSelectedItem();
+                String address = addressTA.getText();
+                
+                String data = "Name: " + name + "\nMobile Number: " + num+"\nEmail ID: "+ email + "\nGender: " + gender + "\nDOB: " + dob
+                        + "\nAddress: " + address +"\nExam: " + exam  + "\nMarks: " + marks + "\nBranch: " + branch;
+                dispTA.setText(data);
+                
+                try {
+                    File file = new File(num + ".txt"); // Using mobile number as unique identifier
+                    if (file.createNewFile()) {
+                        try {
+                            FileWriter fw = new FileWriter(num + ".txt");
+                            fw.write(data);
+                            fw.close();
+                            msgL.setText("           Registration Successful");
+                            clearTF();
+                        } catch (Exception err) {
+                            System.out.println(err);
+                        }
                     }
+                    else {
+                        System.out.println("              File already exists.");
+                        msgL.setText("             User already exists!!");
+                    }
+                } catch (Exception err) {
+                    System.out.println(err);
                 }
-                else {
-                    System.out.println("              File already exists.");
-                    msgL.setText("             User already exists!!");
-                }
-            } catch (Exception err) {
-                System.out.println(err);
+            } else {
+                msgL.setText("*Please Accept Terms and Condition");
             }
-        } else {
-            msgL.setText("*Please Accept Terms and Condition");
+        }
+
+        if(e.getSource() == resetB){
+            clearTF();
         }
     }
 
