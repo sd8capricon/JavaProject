@@ -49,7 +49,6 @@ public class SearchPage extends JFrame implements ActionListener{
                     ArrayList<String> dataList = new ArrayList<String>();
                     
                     for(File fileName: filesList){
-                        // String fName = fileName.getName();
                         try {
                             Scanner fsc = new Scanner(fileName);
                             String data = "";
@@ -141,7 +140,6 @@ public class SearchPage extends JFrame implements ActionListener{
     };
 
     public void actionPerformed(ActionEvent e){
-
     }
     public static void main(String[] args) {
         new SearchPage();
