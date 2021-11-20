@@ -12,7 +12,6 @@ public class Read {
         // ^ java Lambda func. Similar to JS ES6 anonymous arrow funcs
 
         Scanner sc = new Scanner(System.in);
-        // String searchTerm = sc.nextLine();
         String searchTerm = "Siddharth";
         sc.close();
 
@@ -21,14 +20,11 @@ public class Read {
         for (File fileName : filesList) {
             try {
                 Scanner fsc = new Scanner(fileName);
-                // int counter = 0;
                 String data = "";
-                // System.out.println(file.exists());
                 while (fsc.hasNextLine()) {
                     data = data.concat("\n" + fsc.nextLine());
                 }
                 if (data.contains(searchTerm)) {
-                    // System.out.println(data);
                     dataList.add(data);
                 }
                 fsc.close();
