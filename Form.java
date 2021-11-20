@@ -175,6 +175,7 @@ public class Form extends JFrame implements ActionListener {
                 setVisible(false);
 			}
 		});
+
         exitB = new JButton("Exit");
         exitB.setBounds(590, 670, 60, 20);
         add(exitB);
