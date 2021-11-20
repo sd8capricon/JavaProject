@@ -53,7 +53,7 @@ public class SearchPage extends JFrame implements ActionListener{
                             Scanner fsc = new Scanner(fileName);
                             String data = "";
                             int counter = 0;
-                            while(counter<2){
+                            while(counter<3){
                                 data = data.concat("\n"+fsc.nextLine());
                                 counter++;
                             }
