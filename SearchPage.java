@@ -9,7 +9,7 @@ public class SearchPage extends JFrame implements ActionListener{
     JFrame frame = new JFrame();
     JLabel nameL, numL, titlenameL, titlenumL;
     JTextField numTF, nameTF;
-    JButton snameBtn,snumBtn;
+    JButton snameBtn,snumBtn, exitBtn, backBtn;
 
     SearchPage(){
         setTitle("Search Page");
@@ -121,6 +121,24 @@ public class SearchPage extends JFrame implements ActionListener{
                 }
 			}
 		});
+        backBtn = new JButton("Back");
+        backBtn.setBounds(130, 280, 65, 20);
+        add(backBtn);
+        backBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+
+        exitBtn = new JButton("Exit");
+        exitBtn.setBounds(210, 280, 60, 20);
+        add(exitBtn);
+        exitBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+        setVisible(true);
     };
 
     public void actionPerformed(ActionEvent e){
