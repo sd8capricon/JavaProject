@@ -2,9 +2,10 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileWriter;
+import java.awt.Color;
 
 public class Form extends JFrame implements ActionListener {
-    JLabel nameL, mobileL, genderL, dobL, addressL, msgL,emailL,examL,marksL,branchL,collegeL,searchL;
+    JLabel nameL, mobileL, genderL, dobL, addressL, greenmsgL, redmsgL, emailL,examL,marksL,branchL,collegeL,searchL;
     JTextField nameTF, mobileTF, emailTF,markTF;
     JTextArea addressTA, dispTA;
     JRadioButton maleRB, femaleRB;
@@ -155,10 +156,17 @@ public class Form extends JFrame implements ActionListener {
         dispTA.setBounds(350, 80, 300, 420);
         add(dispTA);
 
-        // MSG
-        msgL = new JLabel("");
-        msgL.setBounds(240, 630, 250, 20);
-        add(msgL);
+        // Green MSG
+        greenmsgL = new JLabel("");
+        greenmsgL.setForeground(new Color(0, 128, 0));
+        greenmsgL.setBounds(240, 630, 250, 20);
+        add(greenmsgL);
+
+        // Red MSG
+        redmsgL = new JLabel("");
+        redmsgL.setForeground(Color.RED);
+        redmsgL.setBounds(240, 630, 250, 20);
+        add(redmsgL);
 
         // Search button
         searchL = new JLabel("To Search Application");
@@ -225,7 +233,8 @@ public class Form extends JFrame implements ActionListener {
                             FileWriter fw = new FileWriter(num + ".txt");
                             fw.write(data);
                             fw.close();
-                            msgL.setText("           Registration Successful");
+                            redmsgL.setText("");
+                            greenmsgL.setText("           Registration Successful");
                             clearTF();
                         } catch (Exception err) {
                             System.out.println(err);
@@ -233,13 +242,15 @@ public class Form extends JFrame implements ActionListener {
                     }
                     else {
                         System.out.println("              File already exists.");
-                        msgL.setText("             User already exists!!");
+                        greenmsgL.setText("");
+                        redmsgL.setText("             User already exists!!");
                     }
                 } catch (Exception err) {
                     System.out.println(err);
                 }
             } else {
-                msgL.setText("*Please Accept Terms and Condition");
+                greenmsgL.setText("");
+                redmsgL.setText("*Please Accept Terms and Condition");
             }
         }
 
