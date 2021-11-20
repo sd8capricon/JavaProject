@@ -211,7 +211,7 @@ public class Form extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == submitB){
-            if (termsChB.isSelected()) {
+            if (termsChB.isSelected()) { ////////////// 
                 String name = nameTF.getText();
                 String num = mobileTF.getText();
                 String email = emailTF.getText();
@@ -221,44 +221,48 @@ public class Form extends JFrame implements ActionListener {
                 String gender = femaleRB.isSelected() ? "Female" : "Male";
                 String dob = dayCB.getSelectedItem() + "-" + monthCB.getSelectedItem() + "-" + yearCB.getSelectedItem();
                 String address = addressTA.getText();
-                
-                String data = "Name: " + name + "\nMobile Number: " + num+"\nEmail ID: "+ email + "\nGender: " + gender + "\nDOB: " + dob
-                        + "\nAddress: " + address +"\nExam: " + exam  + "\nMarks: " + marks + "\nBranch: " + branch;
-                dispTA.setText(data);
-                
-                try {
-                    File file = new File(num + ".txt"); // Using mobile number as unique identifier
-                    if (file.createNewFile()) {
-                        try {
-                            FileWriter fw = new FileWriter(num + ".txt");
-                            fw.write(data);
-                            fw.close();
-                            redmsgL.setText("");
-                            greenmsgL.setText("           Registration Successful");
-                            clearTF();
-                        } catch (Exception err) {
+                int checkat = email.indexOf('@');
+                if(checkat>-1 ){  // checking for @ in mail id textfield
+                    String data = "Name: " + name + "\nMobile Number: " + num+"\nEmail ID: "+ email + "\nGender: " + gender + "\nDOB: " + dob
+                    + "\nAddress: " + address +"\nExam: " + exam  + "\nMarks: " + marks + "\nBranch: " + branch;
+                    dispTA.setText(data);
+            
+                    try {
+                        File file = new File(num + ".txt"); // Using mobile number as unique identifier
+                            if (file.createNewFile()) {
+                            try {
+                                FileWriter fw = new FileWriter(num + ".txt");
+                                fw.write(data);
+                                fw.close();
+                                redmsgL.setText("");
+                                greenmsgL.setText("           Registration Successful");
+                                clearTF();
+                            } catch (Exception err) {
                             System.out.println(err);
+                            }
                         }
-                    }
-                    else {
-                        System.out.println("              File already exists.");
-                        greenmsgL.setText("");
-                        redmsgL.setText("             User already exists!!");
-                    }
-                } catch (Exception err) {
+                        else {
+                            System.out.println("              File already exists.");
+                            greenmsgL.setText("");
+                            redmsgL.setText("             User already exists!!");
+                        }
+                    } catch (Exception err) {
                     System.out.println(err);
+                    }
+                } else {
+                        greenmsgL.setText("");
+                        redmsgL.setText("           *Enter Correct Email ID");
+
                 }
-            } else {
+            } else {   //////////
                 greenmsgL.setText("");
                 redmsgL.setText("*Please Accept Terms and Condition");
             }
         }
-
         if(e.getSource() == resetB){
             clearTF();
         }
     }
-
     public static void main(String[] args) {
         new Form();
     }
