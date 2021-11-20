@@ -127,6 +127,7 @@ public class Form extends JFrame implements ActionListener {
         add(marksL);
 
         markTF = new JTextField();
+        markTF.setText("");
         markTF.setBounds(130, 430, 100, 20);
         add(markTF);
 
@@ -222,42 +223,64 @@ public class Form extends JFrame implements ActionListener {
                 String dob = dayCB.getSelectedItem() + "-" + monthCB.getSelectedItem() + "-" + yearCB.getSelectedItem();
                 String address = addressTA.getText();
                 int checkat = email.indexOf('@');
-                //if((name != "") && (num != "") && (email != "") && (marks != "") && (address != ""))
-                if(checkat>-1 && num.matches("[0-9]+")){  // checking for @ in mail id textfield
-                    String data = "Name: " + name + "\nMobile Number: " + num+"\nEmail ID: "+ email + "\nGender: " + gender + "\nDOB: " + dob
-                    + "\nAddress: " + address +"\nExam: " + exam  + "\nMarks: " + marks + "\nBranch: " + branch;
-                    dispTA.setText(data);
+                if( !(name.isEmpty()) && !(num.isEmpty()) && !(email.isEmpty()) && !(marks.isEmpty()) && !(address.isEmpty())){
+                    if(checkat>-1 && num.matches("[0-9]+")){  // checking for @ in mail id textfield
+                        String data = "Name: " + name + "\nMobile Number: " + num+"\nEmail ID: "+ email + "\nGender: " + gender + "\nDOB: " + dob
+                        + "\nAddress: " + address +"\nExam: " + exam  + "\nMarks: " + marks + "\nBranch: " + branch;
+                        dispTA.setText(data);
             
-                    try {
-                        File file = new File(num + ".txt"); // Using mobile number as unique identifier
+                        try {
+                            File file = new File(num + ".txt"); // Using mobile number as unique identifier
                             if (file.createNewFile()) {
-                            try {
-                                FileWriter fw = new FileWriter(num + ".txt");
-                                fw.write(data);
-                                fw.close();
-                                redmsgL.setText("");
-                                greenmsgL.setText("           Registration Successful");
-                                clearTF();
-                            } catch (Exception err) {
-                            System.out.println(err);
+                                try {
+                                    FileWriter fw = new FileWriter(num + ".txt");
+                                    fw.write(data);
+                                    fw.close();
+                                    redmsgL.setText("");
+                                    greenmsgL.setText("           Registration Successful");
+                                    clearTF();
+                                } catch (Exception err) {
+                                System.out.println(err);
+                                }
                             }
+                            else {
+                                System.out.println("              File already exists.");
+                                greenmsgL.setText("");
+                                redmsgL.setText("             User already exists!!");
+                            }
+                        } catch (Exception err) {
+                            System.out.println(err);
                         }
-                        else {
-                            System.out.println("              File already exists.");
+                    } else {
+                        if(!(checkat>-1)){
                             greenmsgL.setText("");
-                            redmsgL.setText("             User already exists!!");
+                            redmsgL.setText("           *Enter Correct Email ID");
                         }
-                    } catch (Exception err) {
-                    System.out.println(err);
+                        else{
+                            greenmsgL.setText("");
+                            redmsgL.setText("             *Enter Correct Number");
+                        }
                     }
                 } else {
-                    if(!(checkat>-1)){
+                    if(name.isEmpty()){
                         greenmsgL.setText("");
-                        redmsgL.setText("           *Enter Correct Email ID");
+                        redmsgL.setText("                       *Enter Name");
+                    } else if(num.isEmpty()){
+                        greenmsgL.setText("");
+                        redmsgL.setText("                     *Enter Number");
+                    } else if(email.isEmpty()){
+                        greenmsgL.setText("");
+                        redmsgL.setText("                   *Enter Email ID");
+                    } else if(marks.isEmpty()){
+                        greenmsgL.setText("");
+                        redmsgL.setText("                      *Enter Marks");
+                    } else if(address.isEmpty()){
+                        greenmsgL.setText("");
+                        redmsgL.setText("                    *Enter Address");
                     }
                     else{
                         greenmsgL.setText("");
-                        redmsgL.setText("      *Enter Correct Mobile Number");
+                        redmsgL.setText("                    *Select Gender");
                     }
                 }
             } else {   //////////
