@@ -152,7 +152,7 @@ public class Form extends JFrame implements ActionListener {
 
         // Display Area
         dispTA = new JTextArea();
-        dispTA.setBounds(350, 80, 300, 400);
+        dispTA.setBounds(350, 80, 300, 420);
         add(dispTA);
 
         // MSG
@@ -170,8 +170,8 @@ public class Form extends JFrame implements ActionListener {
         add(searchB);
         searchB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SearchPage sp = new SearchPage();
-				sp.setVisible(true);
+				SearchPage sPage = new SearchPage();
+				sPage.setVisible(true);
                 setVisible(false);
 			}
 		});

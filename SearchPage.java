@@ -33,7 +33,7 @@ public class SearchPage extends JFrame implements ActionListener{
 
         // Search button
         snameBtn = new JButton("Search");
-        snameBtn.setBounds(130,110,80,20);
+        snameBtn.setBounds(130,105,80,20);
         add(snameBtn);
 		snameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -95,7 +95,7 @@ public class SearchPage extends JFrame implements ActionListener{
 
         // Search button
         snumBtn = new JButton("Search");
-        snumBtn.setBounds(130,230,80,20);
+        snumBtn.setBounds(130,225,80,20);
         add(snumBtn);
 		snumBtn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -122,11 +122,13 @@ public class SearchPage extends JFrame implements ActionListener{
 			}
 		});
         backBtn = new JButton("Back");
-        backBtn.setBounds(130, 280, 65, 20);
+        backBtn.setBounds(140, 280, 65, 20);
         add(backBtn);
         backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				Form fPage = new Form();
+				fPage.setVisible(true);
+                setVisible(false);
 			}
 		});
 
