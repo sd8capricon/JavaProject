@@ -222,7 +222,8 @@ public class Form extends JFrame implements ActionListener {
                 String dob = dayCB.getSelectedItem() + "-" + monthCB.getSelectedItem() + "-" + yearCB.getSelectedItem();
                 String address = addressTA.getText();
                 int checkat = email.indexOf('@');
-                if(checkat>-1 ){  // checking for @ in mail id textfield
+                //if((name != "") && (num != "") && (email != "") && (marks != "") && (address != ""))
+                if(checkat>-1 && num.matches("[0-9]+")){  // checking for @ in mail id textfield
                     String data = "Name: " + name + "\nMobile Number: " + num+"\nEmail ID: "+ email + "\nGender: " + gender + "\nDOB: " + dob
                     + "\nAddress: " + address +"\nExam: " + exam  + "\nMarks: " + marks + "\nBranch: " + branch;
                     dispTA.setText(data);
@@ -250,9 +251,14 @@ public class Form extends JFrame implements ActionListener {
                     System.out.println(err);
                     }
                 } else {
+                    if(!(checkat>-1)){
                         greenmsgL.setText("");
                         redmsgL.setText("           *Enter Correct Email ID");
-
+                    }
+                    else{
+                        greenmsgL.setText("");
+                        redmsgL.setText("      *Enter Correct Mobile Number");
+                    }
                 }
             } else {   //////////
                 greenmsgL.setText("");
