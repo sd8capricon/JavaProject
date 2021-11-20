@@ -18,7 +18,7 @@ public class SearchPage extends JFrame implements ActionListener{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
 
-        // Name
+        // Name Search
         titlenameL = new JLabel("To Search by Name");
         titlenameL.setBounds(30,40,150,20);
         add(titlenameL);
@@ -51,16 +51,12 @@ public class SearchPage extends JFrame implements ActionListener{
                     for(File fileName: filesList){
                         // String fName = fileName.getName();
                         try {
-                            // File file = new File(fName);
                             Scanner fsc = new Scanner(fileName);
-                            // int counter = 0;
                             String data = "";
-                            // System.out.println(file.exists());
                             while(fsc.hasNextLine()){
                                 data = data.concat("\n"+fsc.nextLine());
                             }
                             if(data.contains(searchTerm)){
-                                // System.out.println(data);
                                 dataList.add(data);
                             }
                             fsc.close();
@@ -68,8 +64,6 @@ public class SearchPage extends JFrame implements ActionListener{
                             System.out.println(err);
                         }
                     }
-        
-                    // TODO:Handle these in GUI as well
                     if (dataList.isEmpty()) {
                         JOptionPane.showMessageDialog(frame,"No Application Found with Specified name");
 
@@ -80,7 +74,7 @@ public class SearchPage extends JFrame implements ActionListener{
                 }
 			}
 		});
-        // Number
+        // Number Search
         titlenumL = new JLabel("To Search by Number");
         titlenumL.setBounds(30,160,150,20);
         add(titlenumL);
