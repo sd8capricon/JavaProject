@@ -177,7 +177,7 @@ public class Form extends JFrame implements ActionListener {
 		});
 
         resetB = new JButton("Reset");
-        resetB.setBounds(500, 670, 70, 20);
+        resetB.setBounds(510, 670, 70, 20);
         add(resetB);
         resetB.addActionListener(this);
 
