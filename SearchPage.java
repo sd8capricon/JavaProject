@@ -95,7 +95,7 @@ public class SearchPage extends JFrame implements ActionListener{
 
         // Search button
         snumBtn = new JButton("Search");
-        snumBtn.setBounds(130,240,80,20);
+        snumBtn.setBounds(130,230,80,20);
         add(snumBtn);
 		snumBtn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {

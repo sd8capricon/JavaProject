@@ -10,7 +10,7 @@ public class Form extends JFrame implements ActionListener {
     JRadioButton maleRB, femaleRB;
     JComboBox dayCB, monthCB, yearCB,examCB,branchCB;
     JCheckBox termsChB;
-    JButton submitB, searchB;
+    JButton submitB, searchB, exitB;
     
 
     String days[] = new String[31];
@@ -173,6 +173,14 @@ public class Form extends JFrame implements ActionListener {
 				SearchPage sp = new SearchPage();
 				sp.setVisible(true);
                 setVisible(false);
+			}
+		});
+        exitB = new JButton("Exit");
+        exitB.setBounds(590, 670, 60, 20);
+        add(exitB);
+        exitB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
 			}
 		});
         setVisible(true);
