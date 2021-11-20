@@ -212,19 +212,21 @@ public class Form extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == submitB){
-            if (termsChB.isSelected()) { ////////////// 
+            if (termsChB.isSelected()) {
                 String name = nameTF.getText();
                 String num = mobileTF.getText();
                 String email = emailTF.getText();
                 String exam = (String)(examCB.getSelectedItem());
                 String marks = markTF.getText();
                 String branch = (String)branchCB.getSelectedItem();
-                String gender = femaleRB.isSelected() ? "Female" : "Male";
                 String dob = dayCB.getSelectedItem() + "-" + monthCB.getSelectedItem() + "-" + yearCB.getSelectedItem();
                 String address = addressTA.getText();
                 int checkat = email.indexOf('@');
-                if( !(name.isEmpty()) && !(num.isEmpty()) && !(email.isEmpty()) && !(marks.isEmpty()) && !(address.isEmpty())){
-                    if(checkat>-1 && num.matches("[0-9]+")){  // checking for @ in mail id textfield
+                //checking whether any textfield or checkbox is empty
+                if( !(name.isEmpty()) && !(num.isEmpty()) && !(email.isEmpty()) && !(marks.isEmpty()) && !(address.isEmpty()) && (femaleRB.isSelected() || maleRB.isSelected())){
+                    // checking for @ in mail id and int in num and marks texfields
+                    if(checkat>-1 && num.matches("[0-9]+") && marks.matches("[0-9]+")){  
+                        String gender = femaleRB.isSelected() ? "Female" : "Male";
                         String data = "Name: " + name + "\nMobile Number: " + num+"\nEmail ID: "+ email + "\nGender: " + gender + "\nDOB: " + dob
                         + "\nAddress: " + address +"\nExam: " + exam  + "\nMarks: " + marks + "\nBranch: " + branch;
                         dispTA.setText(data);
@@ -256,10 +258,14 @@ public class Form extends JFrame implements ActionListener {
                             greenmsgL.setText("");
                             redmsgL.setText("           *Enter Correct Email ID");
                         }
-                        else{
+                        else if (!(num.matches("[0-9]+"))){
                             greenmsgL.setText("");
                             redmsgL.setText("             *Enter Correct Number");
+                        }else if (!(marks.matches("[0-9]+"))){
+                            greenmsgL.setText("");
+                            redmsgL.setText("              *Enter Correct Marks");
                         }
+
                     }
                 } else {
                     if(name.isEmpty()){
@@ -283,7 +289,7 @@ public class Form extends JFrame implements ActionListener {
                         redmsgL.setText("                    *Select Gender");
                     }
                 }
-            } else {   //////////
+            } else { 
                 greenmsgL.setText("");
                 redmsgL.setText("*Please Accept Terms and Condition");
             }
