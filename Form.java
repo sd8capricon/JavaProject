@@ -200,16 +200,13 @@ public class Form extends JFrame implements ActionListener {
 		});
         setVisible(true);
     }
-
     void clearTF(){
         nameTF.setText("");
         mobileTF.setText("");
         emailTF.setText("");
         addressTA.setText("");
         markTF.setText("");
-        dispTA.setText("");
     }
-
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == submitB){
             if (termsChB.isSelected()) {
@@ -255,19 +252,18 @@ public class Form extends JFrame implements ActionListener {
                             System.out.println(err);
                         }
                     } else {
-                        if(!(checkat>-1)){
-                            greenmsgL.setText("");
-                            redmsgL.setText("           *Enter Correct Email ID");
-                        }
-                        else if (!(num.matches("[0-9]+"))){
-                            greenmsgL.setText("");
-                            redmsgL.setText("             *Enter Correct Number");
-                        }else if (!(marks.matches("[0-9]+"))){
-                            greenmsgL.setText("");
-                            redmsgL.setText("              *Enter Correct Marks");
-                        }else if (!(alphaCheck)){
+                        if (!(alphaCheck)){
                             greenmsgL.setText("");
                             redmsgL.setText("               *Enter Correct Name");
+                        } else if (!(num.matches("[0-9]+"))){
+                            greenmsgL.setText("");
+                            redmsgL.setText("             *Enter Correct Number");
+                        } else if(!(checkat>-1)){
+                            greenmsgL.setText("");
+                            redmsgL.setText("           *Enter Correct Email ID");
+                        } else if (!(marks.matches("[0-9]+"))){
+                            greenmsgL.setText("");
+                            redmsgL.setText("              *Enter Correct Marks");
                         }
                     }
                 } else {
@@ -280,16 +276,15 @@ public class Form extends JFrame implements ActionListener {
                     } else if(email.isEmpty()){
                         greenmsgL.setText("");
                         redmsgL.setText("                   *Enter Email ID");
-                    } else if(marks.isEmpty()){
+                    } else if (!(femaleRB.isSelected() || maleRB.isSelected())){
                         greenmsgL.setText("");
-                        redmsgL.setText("                      *Enter Marks");
+                        redmsgL.setText("                    *Select Gender");
                     } else if(address.isEmpty()){
                         greenmsgL.setText("");
                         redmsgL.setText("                    *Enter Address");
-                    }
-                    else{
+                    } else if(marks.isEmpty()){
                         greenmsgL.setText("");
-                        redmsgL.setText("                    *Select Gender");
+                        redmsgL.setText("                      *Enter Marks");
                     }
                 }
             } else { 
@@ -299,6 +294,7 @@ public class Form extends JFrame implements ActionListener {
         }
         if(e.getSource() == resetB){
             clearTF();
+            dispTA.setText("");
         }
     }
     public static void main(String[] args) {

@@ -8,22 +8,22 @@ import java.awt.Color;
 
 public class SearchPage extends JFrame implements ActionListener{
     JFrame frame = new JFrame();
-    JLabel nameL, numL, titlenameL, titlenumL, msgL;
+    JLabel nameL, numL, titlenameL, titlenumL, nameMsgL, numMsgL;
     JTextField numTF, nameTF;
     JButton snameBtn,snumBtn, exitBtn, backBtn;
 
     SearchPage(){
         setTitle("Search Page");
-        setSize(300, 350);
+        setSize(300, 355);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
 
-        // Msg
-        msgL = new JLabel("");
-        msgL.setForeground(Color.RED);
-        msgL.setBounds(30, 130, 250, 20);
-        add(msgL);
+        // nameMsg
+        nameMsgL = new JLabel("");
+        nameMsgL.setForeground(Color.RED);
+        nameMsgL.setBounds(30, 130, 250, 20);
+        add(nameMsgL);
 
         // Name Search
         titlenameL = new JLabel("To Search by Name");
@@ -47,9 +47,12 @@ public class SearchPage extends JFrame implements ActionListener{
                 if(e.getSource() == snameBtn){
                     String name = nameTF.getText();
                     if(!(name.isEmpty())){
-                        msgL.setText("");
+                        numMsgL.setText("");
+                        nameMsgL.setText("");
                         boolean alphabetCheck = name.matches("[a-zA-Z]+");
                         if(alphabetCheck){
+                            numMsgL.setText("");
+                            nameMsgL.setText("");
                             File dirPath = new File(".");
                             File filesList[] = dirPath.listFiles((d, fname) -> fname.endsWith(".txt")); 
                             // ^ java Lambda func. Similar to JS ES6 anonymous arrow funcs      
@@ -81,14 +84,23 @@ public class SearchPage extends JFrame implements ActionListener{
                             }
                         }
                         else{
-                            msgL.setText("                     *Enter Correct Name");
+                            numMsgL.setText("");
+                            nameMsgL.setText("                     *Enter Correct Name");
                         }
                     } else{
-                        msgL.setText("                            *Enter Name");
+                        numMsgL.setText("");
+                        nameMsgL.setText("                            *Enter Name");
                     }
                 }
 			}
 		});
+        
+        // numMsg
+        numMsgL = new JLabel("");
+        numMsgL.setForeground(Color.RED);
+        numMsgL.setBounds(30, 250, 250, 20);
+        add(numMsgL);
+
         // Number Search
         titlenumL = new JLabel("To Search by Number");
         titlenumL.setBounds(30,160,150,20);
@@ -110,31 +122,44 @@ public class SearchPage extends JFrame implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == snumBtn){
                     String num = numTF.getText();
-                    File numberFile = new File(num+".txt");
-                    String numData = "";
-                    try {
-                        Scanner fsc2 = new Scanner(numberFile);
-                        if(numberFile.exists()){
-                            while (fsc2.hasNextLine()) {
-                                numData = numData.concat("\n" + fsc2.nextLine());
+                    if (!(num.isEmpty())){
+                        numMsgL.setText("");
+                        nameMsgL.setText("");
+                        if(num.matches("[0-9]+")){
+                            numMsgL.setText("");
+                            nameMsgL.setText("");
+                            File numberFile = new File(num+".txt");
+                            String numData = "";
+                            try {
+                                Scanner fsc2 = new Scanner(numberFile);
+                                if(numberFile.exists()){
+                                    while (fsc2.hasNextLine()) {
+                                        numData = numData.concat("\n" + fsc2.nextLine());
+                                    }
+                                } 
+                                fsc2.close();
+                            } catch (Exception err) {
+                                System.out.println(e);
                             }
+                            if(numberFile.exists()){
+                                JOptionPane.showMessageDialog(frame,numData);
+                            }      
+                            else{
+                                JOptionPane.showMessageDialog(frame,"No Application Found with Specified number");                       
+                            }
+                        } else {
+                            nameMsgL.setText("");
+                            numMsgL.setText("                   *Enter Correct Number");
                         }
-                        
-                        fsc2.close();
-                    } catch (Exception err) {
-                        System.out.println(e);
-                    }
-                    if(numberFile.exists()){
-                        JOptionPane.showMessageDialog(frame,numData);
-                    }      
-                    else{
-                        JOptionPane.showMessageDialog(frame,"No Application Found with Specified number");                       
+                    } else {
+                        nameMsgL.setText("");
+                        numMsgL.setText("                          *Enter Number");
                     }
                 }
 			}
 		});
         backBtn = new JButton("Back");
-        backBtn.setBounds(140, 280, 65, 20);
+        backBtn.setBounds(140, 285, 65, 20);
         add(backBtn);
         backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -145,7 +170,7 @@ public class SearchPage extends JFrame implements ActionListener{
 		});
 
         exitBtn = new JButton("Exit");
-        exitBtn.setBounds(210, 280, 60, 20);
+        exitBtn.setBounds(210, 285, 60, 20);
         add(exitBtn);
         exitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
