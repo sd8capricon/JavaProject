@@ -2,9 +2,10 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileWriter;
+import java.awt.Color;
 
 public class Form extends JFrame implements ActionListener {
-    JLabel nameL, mobileL, genderL, dobL, addressL, msgL,emailL,examL,marksL,branchL,collegeL,searchL;
+    JLabel nameL, mobileL, genderL, dobL, addressL, greenmsgL, redmsgL, emailL,examL,marksL,branchL,collegeL,searchL;
     JTextField nameTF, mobileTF, emailTF,markTF;
     JTextArea addressTA, dispTA;
     JRadioButton maleRB, femaleRB;
@@ -126,6 +127,7 @@ public class Form extends JFrame implements ActionListener {
         add(marksL);
 
         markTF = new JTextField();
+        markTF.setText("");
         markTF.setBounds(130, 430, 100, 20);
         add(markTF);
 
@@ -155,10 +157,17 @@ public class Form extends JFrame implements ActionListener {
         dispTA.setBounds(350, 80, 300, 420);
         add(dispTA);
 
-        // MSG
-        msgL = new JLabel("");
-        msgL.setBounds(240, 630, 250, 20);
-        add(msgL);
+        // Green MSG
+        greenmsgL = new JLabel("");
+        greenmsgL.setForeground(new Color(0, 128, 0));
+        greenmsgL.setBounds(240, 630, 250, 20);
+        add(greenmsgL);
+
+        // Red MSG
+        redmsgL = new JLabel("");
+        redmsgL.setForeground(Color.RED);
+        redmsgL.setBounds(240, 630, 250, 20);
+        add(redmsgL);
 
         // Search button
         searchL = new JLabel("To Search Application");
@@ -191,7 +200,6 @@ public class Form extends JFrame implements ActionListener {
 		});
         setVisible(true);
     }
-
     void clearTF(){
         nameTF.setText("");
         mobileTF.setText("");
@@ -199,7 +207,6 @@ public class Form extends JFrame implements ActionListener {
         addressTA.setText("");
         markTF.setText("");
     }
-
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == submitB){
             if (termsChB.isSelected()) {
@@ -209,44 +216,87 @@ public class Form extends JFrame implements ActionListener {
                 String exam = (String)(examCB.getSelectedItem());
                 String marks = markTF.getText();
                 String branch = (String)branchCB.getSelectedItem();
-                String gender = femaleRB.isSelected() ? "Female" : "Male";
                 String dob = dayCB.getSelectedItem() + "-" + monthCB.getSelectedItem() + "-" + yearCB.getSelectedItem();
                 String address = addressTA.getText();
-                
-                String data = "Name: " + name + "\nMobile Number: " + num+"\nEmail ID: "+ email + "\nGender: " + gender + "\nDOB: " + dob
+                int checkat = email.indexOf('@');
+                //checking whether any textfield or checkbox is empty
+                if( !(name.isEmpty()) && !(num.isEmpty()) && !(email.isEmpty()) && !(marks.isEmpty()) && !(address.isEmpty()) && (femaleRB.isSelected() || maleRB.isSelected())){
+                    // checking for @ in mail id and int in num and marks texfieds and whether name contains special char or number
+                    boolean alphaCheck = name.matches("[a-zA-Z]+");
+                    if(checkat>-1 && num.matches("[0-9]+") && marks.matches("[0-9]+") && (alphaCheck)){  
+                        String gender = femaleRB.isSelected() ? "Female" : "Male";
+                        String data = "Name: " + name + "\nMobile Number: " + num+"\nEmail ID: "+ email + "\nGender: " + gender + "\nDOB: " + dob
                         + "\nAddress: " + address +"\nExam: " + exam  + "\nMarks: " + marks + "\nBranch: " + branch;
-                dispTA.setText(data);
-                
-                try {
-                    File file = new File(num + ".txt"); // Using mobile number as unique identifier
-                    if (file.createNewFile()) {
+
+                        dispTA.setText(data);
                         try {
-                            FileWriter fw = new FileWriter(num + ".txt");
-                            fw.write(data);
-                            fw.close();
-                            msgL.setText("           Registration Successful");
-                            clearTF();
+                            File file = new File(num + ".txt"); // Using mobile number as unique identifier
+                            if (file.createNewFile()) {
+                                try {
+                                    FileWriter fw = new FileWriter(num + ".txt");
+                                    fw.write(data);
+                                    fw.close();
+                                    redmsgL.setText("");
+                                    greenmsgL.setText("           Registration Successful");
+                                    clearTF();
+                                } catch (Exception err) {
+                                System.out.println(err);
+                                }
+                            }
+                            else {
+                                System.out.println("              File already exists.");
+                                greenmsgL.setText("");
+                                redmsgL.setText("             User already exists!!");
+                            }
                         } catch (Exception err) {
                             System.out.println(err);
                         }
+                    } else {
+                        if (!(alphaCheck)){
+                            greenmsgL.setText("");
+                            redmsgL.setText("               *Enter Correct Name");
+                        } else if (!(num.matches("[0-9]+"))){
+                            greenmsgL.setText("");
+                            redmsgL.setText("             *Enter Correct Number");
+                        } else if(!(checkat>-1)){
+                            greenmsgL.setText("");
+                            redmsgL.setText("           *Enter Correct Email ID");
+                        } else if (!(marks.matches("[0-9]+"))){
+                            greenmsgL.setText("");
+                            redmsgL.setText("              *Enter Correct Marks");
+                        }
                     }
-                    else {
-                        System.out.println("              File already exists.");
-                        msgL.setText("             User already exists!!");
+                } else {
+                    if(name.isEmpty()){
+                        greenmsgL.setText("");
+                        redmsgL.setText("                       *Enter Name");
+                    } else if(num.isEmpty()){
+                        greenmsgL.setText("");
+                        redmsgL.setText("                     *Enter Number");
+                    } else if(email.isEmpty()){
+                        greenmsgL.setText("");
+                        redmsgL.setText("                   *Enter Email ID");
+                    } else if (!(femaleRB.isSelected() || maleRB.isSelected())){
+                        greenmsgL.setText("");
+                        redmsgL.setText("                    *Select Gender");
+                    } else if(address.isEmpty()){
+                        greenmsgL.setText("");
+                        redmsgL.setText("                    *Enter Address");
+                    } else if(marks.isEmpty()){
+                        greenmsgL.setText("");
+                        redmsgL.setText("                      *Enter Marks");
                     }
-                } catch (Exception err) {
-                    System.out.println(err);
                 }
-            } else {
-                msgL.setText("*Please Accept Terms and Condition");
+            } else { 
+                greenmsgL.setText("");
+                redmsgL.setText("*Please Accept Terms and Condition");
             }
         }
-
         if(e.getSource() == resetB){
             clearTF();
+            dispTA.setText("");
         }
     }
-
     public static void main(String[] args) {
         new Form();
     }
