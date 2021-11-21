@@ -225,7 +225,7 @@ public class Form extends JFrame implements ActionListener {
                 //checking whether any textfield or checkbox is empty
                 if( !(name.isEmpty()) && !(num.isEmpty()) && !(email.isEmpty()) && !(marks.isEmpty()) && !(address.isEmpty()) && (femaleRB.isSelected() || maleRB.isSelected())){
                     // checking for @ in mail id and int in num and marks texfields
-                    if(checkat>-1 && num.matches("[0-9]+") && marks.matches("[0-9]+")){  
+                    if(checkat>-1 && num.matches("[0-9]+") && marks.matches("[0-9]+") && (!(name.matches("[0-9]+")) )){  
                         String gender = femaleRB.isSelected() ? "Female" : "Male";
                         String data = "Name: " + name + "\nMobile Number: " + num+"\nEmail ID: "+ email + "\nGender: " + gender + "\nDOB: " + dob
                         + "\nAddress: " + address +"\nExam: " + exam  + "\nMarks: " + marks + "\nBranch: " + branch;
@@ -264,6 +264,9 @@ public class Form extends JFrame implements ActionListener {
                         }else if (!(marks.matches("[0-9]+"))){
                             greenmsgL.setText("");
                             redmsgL.setText("              *Enter Correct Marks");
+                        }else if (name.matches("[0-9]+")){
+                            greenmsgL.setText("");
+                            redmsgL.setText("               *Enter Correct Name");
                         }
 
                     }
