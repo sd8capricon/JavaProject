@@ -224,13 +224,14 @@ public class Form extends JFrame implements ActionListener {
                 int checkat = email.indexOf('@');
                 //checking whether any textfield or checkbox is empty
                 if( !(name.isEmpty()) && !(num.isEmpty()) && !(email.isEmpty()) && !(marks.isEmpty()) && !(address.isEmpty()) && (femaleRB.isSelected() || maleRB.isSelected())){
-                    // checking for @ in mail id and int in num and marks texfields
-                    if(checkat>-1 && num.matches("[0-9]+") && marks.matches("[0-9]+") && (!(name.matches("[0-9]+")) )){  
+                    // checking for @ in mail id and int in num and marks texfieds and whether name contains special char or number
+                    boolean alphaCheck = name.matches("[a-zA-Z]+");
+                    if(checkat>-1 && num.matches("[0-9]+") && marks.matches("[0-9]+") && (alphaCheck)){  
                         String gender = femaleRB.isSelected() ? "Female" : "Male";
                         String data = "Name: " + name + "\nMobile Number: " + num+"\nEmail ID: "+ email + "\nGender: " + gender + "\nDOB: " + dob
                         + "\nAddress: " + address +"\nExam: " + exam  + "\nMarks: " + marks + "\nBranch: " + branch;
+
                         dispTA.setText(data);
-            
                         try {
                             File file = new File(num + ".txt"); // Using mobile number as unique identifier
                             if (file.createNewFile()) {
@@ -264,11 +265,10 @@ public class Form extends JFrame implements ActionListener {
                         }else if (!(marks.matches("[0-9]+"))){
                             greenmsgL.setText("");
                             redmsgL.setText("              *Enter Correct Marks");
-                        }else if (name.matches("[0-9]+")){
+                        }else if (!(alphaCheck)){
                             greenmsgL.setText("");
                             redmsgL.setText("               *Enter Correct Name");
                         }
-
                     }
                 } else {
                     if(name.isEmpty()){

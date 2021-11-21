@@ -4,10 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import java.awt.Color;
 
 public class SearchPage extends JFrame implements ActionListener{
     JFrame frame = new JFrame();
-    JLabel nameL, numL, titlenameL, titlenumL;
+    JLabel nameL, numL, titlenameL, titlenumL, msgL;
     JTextField numTF, nameTF;
     JButton snameBtn,snumBtn, exitBtn, backBtn;
 
@@ -17,6 +18,12 @@ public class SearchPage extends JFrame implements ActionListener{
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+
+        // Msg
+        msgL = new JLabel("");
+        msgL.setForeground(Color.RED);
+        msgL.setBounds(30, 130, 250, 20);
+        add(msgL);
 
         // Name Search
         titlenameL = new JLabel("To Search by Name");
@@ -39,38 +46,45 @@ public class SearchPage extends JFrame implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == snameBtn){
                     String name = nameTF.getText();
-                    
-                    File dirPath = new File(".");
-                    File filesList[] = dirPath.listFiles((d, fname) -> fname.endsWith(".txt")); 
-                    // ^ java Lambda func. Similar to JS ES6 anonymous arrow funcs
-        
-                    String searchTerm = name;
-        
-                    ArrayList<String> dataList = new ArrayList<String>();
-                    
-                    for(File fileName: filesList){
-                        try {
-                            Scanner fsc = new Scanner(fileName);
-                            String data = "";
-                            int counter = 0;
-                            while(counter<3){
-                                data = data.concat("\n"+fsc.nextLine());
-                                counter++;
+                    if(!(name.isEmpty())){
+                        msgL.setText("");
+                        boolean alphabetCheck = name.matches("[a-zA-Z]+");
+                        if(alphabetCheck){
+                            File dirPath = new File(".");
+                            File filesList[] = dirPath.listFiles((d, fname) -> fname.endsWith(".txt")); 
+                            // ^ java Lambda func. Similar to JS ES6 anonymous arrow funcs      
+                            String searchTerm = name;
+                            ArrayList<String> dataList = new ArrayList<String>();
+                            for(File fileName: filesList){
+                                try {
+                                    Scanner fsc = new Scanner(fileName);
+                                    String data = "";
+                                    int counter = 0;
+                                    while(counter<3){
+                                        data = data.concat("\n"+fsc.nextLine());
+                                        counter++;
+                                    }
+                                    if(data.contains(searchTerm)){
+                                        dataList.add(data);
+                                    }
+                                    fsc.close();
+                                } catch (Exception err) {
+                                    System.out.println(err);
+                                }
                             }
-                            if(data.contains(searchTerm)){
-                                dataList.add(data);
+                            if (dataList.isEmpty()) {
+                                JOptionPane.showMessageDialog(frame,"No Application Found with Specified name");
+
+                            } else {
+                            JOptionPane.showMessageDialog(frame,dataList.size() +" Application found");
+
                             }
-                            fsc.close();
-                        } catch (Exception err) {
-                            System.out.println(err);
                         }
-                    }
-                    if (dataList.isEmpty()) {
-                        JOptionPane.showMessageDialog(frame,"No Application Found with Specified name");
-
-                    } else {
-                        JOptionPane.showMessageDialog(frame,dataList.size() +" Application found");
-
+                        else{
+                            msgL.setText("                     *Enter Correct Name");
+                        }
+                    } else{
+                        msgL.setText("                            *Enter Name");
                     }
                 }
 			}
